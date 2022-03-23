@@ -20,6 +20,49 @@ print("*** Welcome to Mickeys Glizzys ***")
 print("*** My name is",name, "***")
 print("I will be here to help you to order your hot and ready Sausages")
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Main Function
 def main():
     '''
     Purpose: To generate a random name from the list and print out a welcome message
