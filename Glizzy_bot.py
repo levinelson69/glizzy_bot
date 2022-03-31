@@ -30,11 +30,6 @@ print("I will be here to help you to order your hot and ready Sausages")
 
 
 
-
-
-
-
-
 # Menu so that the user can choose either pickup or delivery
 print ("Is your order for Pickup or would you like it for Delivery?")
 print ("For Pickup please enter 1")
