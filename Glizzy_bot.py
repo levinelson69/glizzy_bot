@@ -4,6 +4,11 @@ from random import randint
 
 #List of random names
 names = ["Mickey", "Nate", "Jay", "Jess", "Sally", "Annie", "Christopher", "Jake", "Ironone", "Betty"]
+#List of Sausage names
+sausage_names = ['Margherita','Pepperoni','Hawaiian','Cheese','Italian','Veggie','Vegan','Chicken Deluxe',
+                'Mega Meat Lovers','Seafood Deluxe','Apricot Chicken Deluxe','BBQ Chicken Deluxe']
+#List of Sausage prices
+sausage_prices = [3.50, 3.50, 3.50, 3.50, 3.50, 3.50, 3.50, 4.50, 4.50, 4.50, 6.00, 6.00]
 
 def welcome():
     '''
@@ -93,8 +98,13 @@ def delivery_info():
     customer_details['suburb'] = not_blank(question )
     print (customer_details['suburb'])
     
-    
+#Sausage Menu
 
+def menu():
+    number_sausages = 12
+
+    for count in range (number_sausages):
+        print("{} {} ${:.2f}" .format(count+1,sausage_names[count],sausage_prices[count]))
 
 
 
@@ -145,5 +155,6 @@ def main():
     '''
     welcome()
     del_pick = order_type()
+    menu()
 
 main()
