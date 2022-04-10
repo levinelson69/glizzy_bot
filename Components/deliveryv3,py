@@ -1,7 +1,7 @@
 #Customer details dictonary 
 customer_details = {}
 
-def not_blank(question):    
+def not_blank(question):
     valid = False
     while not valid:
         response = input(question)
@@ -11,7 +11,7 @@ def not_blank(question):
             print("This cannot be blank")
 
 
-def pickup():
+def delivery_info():
     question = ("Please enter your name ")
     customer_details['name'] = not_blank(question )
     print (customer_details['name'])
@@ -31,5 +31,6 @@ def pickup():
     question = ("Please enter your suburb ")
     customer_details['suburb'] = not_blank(question )
     print (customer_details['suburb'])
+    print (customer_details)
 
-pickup()
+delivery_info()

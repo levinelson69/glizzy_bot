@@ -144,8 +144,6 @@ def main():
     Returns: none
     '''
     welcome()
-    order_type()
-    pickup_info()
-    delivery_info()
+    del_pick = order_type()
 
 main()
