@@ -1,6 +1,7 @@
 # Glizzy bot program
 import random
 from random import randint
+import sys
 
 #List of random names
 names = ["Mickey", "Nate", "Jay", "Jess", "Sally", "Annie", "Christopher", "Jake", "Ironone", "Betty"]
@@ -167,47 +168,62 @@ def print_order(del_pick):
     print("Total Order Cost")
     print(f"${total_cost:.2f}")
 
+#Confirm order or cancel
+def cancel_confirm(del_pick):
+    print ("Please Confirm Your Order")
+    print ("For confirm please enter 1")
+    print ("For cancel please enter 2")
+    while True:
+        try:
+            confirm = int(input("Please enter a number "))
+            if confirm >= 1 and confirm <= 2:
+                if confirm == 1:
+                    print ("Order Confirmed")
+                    if del_pick == "pickup":
+                        print("You will be sent a text message when your order is ready to be picked up")
+                        new_exit()
+                    break
 
+                elif confirm == 2:
+                    print ("Order Cancelled")
+                    print ("You can restart your order or exit the BOT")
+                    new_exit()
+                    break
+            else:
+                print("Number must be 1 or 2")
+        except ValueError:
+            print("That is not a valid number")
+            print("Please enter 1 or 2")
 
+#Option for new order
+def new_exit():
+    print ("Would you like to place another Order or Exit?")
+    print ("To place another order please enter 1")
+    print ("To exit the BOT please enter 2")
+    while True:
+        try:
+            confirm = int(input("Please enter a number "))
+            if confirm >= 1 and confirm <= 2:
+                if confirm == 1:
+                    print ("New Order")
+                    order_list.clear()
+                    order_cost.clear()
+                    customer_details.clear()
+                    main()
+                    break
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                elif confirm == 2:
+                    print ("Exit")
+                    order_list.clear()
+                    order_cost.clear()
+                    customer_details.clear()
+                    sys.exit()
+                    break
+            else:
+                print("Number must be 1 or 2")
+        except ValueError:
+            print("That is not a valid number")
+            print("Please enter 1 or 2")
 
 #Main Function
 def main():
@@ -221,4 +237,5 @@ def main():
     menu()
     order_sausage()
     print_order(del_pick)
+    cancel_confirm(del_pick)
 main()
