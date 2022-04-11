@@ -61,6 +61,8 @@ def order_type():
                     break
                 elif delivery == 2:
                     print ("Delivery")
+                    print ("**You must pay an additional $9.00 Delivery Charge if you order 5 or less Sausages**")
+                    print()
                     delivery_info()
                     del_pick = "delivery"
                     break
@@ -152,10 +154,11 @@ def print_order(del_pick):
         print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']}")
 
     elif del_pick =="delivery":
-        print("Your order is for Delivery")
+        print("Your order is for Delivery, a $9.00 delivery charge applies")
+        total_cost = total_cost + 9
         print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']} \nCustomer Address: {customer_details['house']} {customer_details['street']} {customer_details['suburb']}")
     print()
-    print("Order Details")
+    print(" Your Order Details")
     count = 0
     for item in order_list:
         print("Ordered: {} Cost ${:.2f}".format(item, order_cost[count]))
