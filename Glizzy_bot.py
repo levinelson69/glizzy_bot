@@ -3,7 +3,8 @@
 
 
 #Known Bugs
-# 11/04/22 - Final printout 
+# 11/04/22 - Final printout is not printing customer details correctly
+
 import random
 from random import randint
 import sys
