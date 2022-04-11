@@ -30,7 +30,7 @@ print("*** Welcome to Mickeys Glizzys ***")
 print("*** My name is",name, "***")
 print("I will be here to help you to order your hot and ready Sausages")
 
-#Customer details dictonary 
+#customer details dictonary 
 customer_details = {}
 # Validates inputs to check if they are blank
 def not_blank(question):
@@ -143,6 +143,29 @@ def order_sausage():
             print("{} ${:.2f})" .format(sausage_names[sausage_ordered],sausage_prices[sausage_ordered]))
             num_sausages = num_sausages-1
 
+#Print order out - including if order is del or pickup and names of each pizza - total cost including any delivery charge
+def print_order(del_pick):
+    total_cost = sum(order_cost)
+    print ("Customer Details")
+    if del_pick =="pickup":
+        print("Your order is for Pickup")
+        print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']}")
+
+    elif del_pick =="delivery":
+        print("Your order is for Delivery")
+        print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']} \nCustomer Address: {customer_details['house']} {customer_details['street']} {customer_details['suburb']}")
+    print()
+    print("Order Details")
+    count = 0
+    for item in order_list:
+        print("Ordered: {} Cost ${:.2f}".format(item, order_cost[count]))
+        count = count+1
+    print()
+    print("Total Order Cost")
+    print(f"${total_cost:.2f}")
+
+
+
 
 
 
@@ -194,5 +217,5 @@ def main():
     del_pick = order_type()
     menu()
     order_sausage()
-
+    print_order(del_pick)
 main()
