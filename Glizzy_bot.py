@@ -1,16 +1,15 @@
 # Glizzy bot program
 
-
-
 #Known Bugs
 # 11/04/22 - Final printout is not printing customer details correctly
+# 12/04/22 - If order is for pickup, you cannot cancel the order
 
 import random
 from random import randint
 import sys
 
 #List of random names
-names = ["Mickey", "Nate", "Jay", "Jess", "Sally", "Annie", "Christopher", "Jake", "Ironone", "Betty"]
+names = ["Mickey", "Nate", "Jay", "Jess", "Sally", "Annie", "Christopher", "Jake", "Nasal", "Betty"]
 #List of Sausage names
 sausage_names = ['Beef', 'Chicken', 'Pork', 'Cheese filled Pork', 'Spicy Pork', 'Venison', 'Peeled Pork', 'Authetic Bratwurst', 
                 'Blood', 'Italian', 'Enormous Pork', 'World famous pork sausage within a pork Sausage']
@@ -36,7 +35,6 @@ name = (names[num])
 print("*** Welcome to Mickeys Glizzys ***")
 print("*** My name is",name, "***")
 print("I will be here to help you to order your hot and ready Sausages")
-
 #customer details dictonary 
 customer_details = {}
 # Validates inputs to check if they are blank
@@ -57,10 +55,10 @@ def val_int(low, high, question):
             if num >= low and num <= high:
                 return num
             else:
-                print(f"Please enter a number between {low} and {high}")
+                print(f"Please enter a number between {low} and {high} ")
         except ValueError:
             print("That is not a valid number")
-            print(f"Please enter a number between {low} and {high}")
+            print(f"Please enter a number between {low} and {high} ")
 
 
 
@@ -69,10 +67,14 @@ def order_type():
     del_pick = ""
     LOW = 1
     HIGH = 2
-    question = (f"Enter a number between {LOW} and {HIGH} ")
+    question = (f"Enter a number between {LOW} and {HIGH}: ")
+    print()
     print ("Is your order for pickup or delivery?")
+    print()
     print ("For pickup please enter 1")
+    print()
     print ("For delivery please enter 2")
+    print()
     delivery = val_int(LOW, HIGH, question)
     if delivery == 1:
         print ("Pickup")
@@ -80,6 +82,7 @@ def order_type():
         pickup_info()
     else:
         print ("Delivery")
+        print()
         print ("**You must pay an additional $9.00 Delivery Charge if you order 5 or less Sausages**")
         print()
         delivery_info()
@@ -134,14 +137,18 @@ def order_sausage():
     MENU_LOW = 1
     MENU_HIGH = 12
     question = (f"Enter a number between {LOW} and {HIGH} ")
+    print()
     print("How many sausages do you want to order?")
+    print()
     num_sausages = val_int(LOW, HIGH, question)
 
     #Choose sausage from menu
     for item in range(num_sausages):
         while num_sausages > 0:
+            print()
             print("Please choose your sausages by"
             " entering the number from the menu ")
+            print()
             question = (f"Enter a number between {MENU_LOW} and {MENU_HIGH} ")
             sausage_ordered = val_int(MENU_LOW, MENU_HIGH, question)
             sausage_ordered = sausage_ordered -1
@@ -156,12 +163,17 @@ def print_order(del_pick):
     print ("Customer Details")
     if del_pick =="pickup":
         print("Your order is for Pickup")
+        print()
         print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']}")
+        print()
 
     elif del_pick =="delivery":
-        print("Your order is for Delivery, a $9.00 delivery charge applies")
+        print()
+        print("Your order is for Delivery")
         total_cost = total_cost + 9
+        print()
         print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']} \nCustomer Address: {customer_details['house']} {customer_details['street']} {customer_details['suburb']}")
+        print("A $9.00 Delivery charge applies")
     print()
     print(" Your Order Details")
     count = 0
@@ -177,18 +189,21 @@ def cancel_confirm(del_pick):
     LOW = 1
     HIGH = 2
     question = (f"Enter a number between {LOW} and {HIGH} ")
+    print()
     print ("Please Confirm Your Order")
+    print()
     print ("For confirm please enter 1")
+    print()
     print ("For cancel please enter 2")
+    print()
     confirm = val_int(LOW, HIGH, question)
     if confirm == 1:
-        print ("Order Confirmed")
+        print ("**Order Confirmed**")
     if del_pick == "pickup":
         print("You will be sent a text message when your order is ready to be picked up")
         new_exit()
-
     elif confirm == 2:
-        print ("Order Cancelled")
+        print ("**Order Cancelled**")
         print ("You can restart your order or exit the BOT")
         new_exit()
 
@@ -198,9 +213,13 @@ def new_exit():
     LOW = 1
     HIGH = 2
     question = (f"Enter a number between {LOW} and {HIGH} ")
+    print()
     print ("Would you like to place another Order or Exit?")
+    print()
     print ("To place another order please enter 1")
+    print()
     print ("To exit the BOT please enter 2")
+    print()
     confirm = val_int(LOW, HIGH, question)
     if confirm == 1:
         print ("New Order")
