@@ -199,7 +199,8 @@ def cancel_confirm(del_pick):
     confirm = val_int(LOW, HIGH, question)
     if confirm == 1:
         print ("**Order Confirmed**")
-    if del_pick == "pickup":
+        new_exit()
+    if del_pick == "pickup" and confirm ==1:
         print("You will be sent a text message when your order is ready to be picked up")
         new_exit()
     elif confirm == 2:
