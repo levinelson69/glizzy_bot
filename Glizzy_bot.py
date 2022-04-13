@@ -205,7 +205,7 @@ def cancel_confirm(del_pick):
         new_exit()
     elif confirm == 2:
         print ("**Order Cancelled**")
-        print ("You can restart your order or exit the BOT")
+        print ("You may restart your order or exit the BOT")
         new_exit()
 
 
