@@ -7,7 +7,11 @@
 import random
 from random import randint
 import sys
-
+# Constants
+LOW = 1
+HIGH = 2
+PH_LOW = 7
+PH_HIGH = 10
 # List of random names
 names = ["Mickey", "Nate", "Jay", "Jess", "Sally",
          "Annie", "Christopher", "Jake", "Nasal", "Betty"]
@@ -77,11 +81,25 @@ def val_int(low, high, question):
             print(f"Please enter a number between {low} and {high} ")
 
 
+def check_phone(question, PH_LOW, PH_HIGH):
+    while True:
+        try:
+            num = int(input(question))
+            test_num = num
+            count = 0
+            while test_num > 0:
+                test_num = test_num//10
+                count = count + 1
+            if count >= PH_LOW and count <= PH_HIGH:
+                return str(num)
+            else:
+                print("NZ phone numbers have between 7 and 10 digits")
+        except ValueError:
+            print("Please enter a number")
+
 # Menu so that the user can choose either pickup or delivery
 def order_type():  # Defining the order_type function
     del_pick = ""
-    LOW = 1
-    HIGH = 2
     question = (f"Enter a number between {LOW} and {HIGH}: ")
     print()  # Spacing between my print statements
     print ("Is your order for pickup or delivery?")
@@ -112,7 +130,7 @@ def pickup_info():
     print (customer_details['name'])
 
     question = ("Please enter your phone number ")
-    customer_details['phone'] = not_blank(question )
+    customer_details['phone'] = check_phone(question, PH_LOW, PH_HIGH)
     print (customer_details['phone'])
 
 
@@ -123,7 +141,8 @@ def delivery_info():  # Defined function
     print (customer_details['name'])
 
     question = ("Please enter your phone number ")
-    customer_details['phone'] = not_blank(question )
+    customer_details['phone'] = check_phone(question, PH_LOW, PH_HIGH)
+
     print (customer_details['phone'])
 
     question = ("Please enter your house number ")
@@ -209,8 +228,6 @@ def print_order(del_pick):
 
 # Confirm order or cancel
 def cancel_confirm(del_pick):
-    LOW = 1
-    HIGH = 2
     question = (f"Enter a number between {LOW} and {HIGH} ")
     print()  # Spacing between my print statements
     print ("Please Confirm Your Order")
@@ -234,8 +251,6 @@ def cancel_confirm(del_pick):
 
 # Option for new order
 def new_exit():
-    LOW = 1
-    HIGH = 2
     question = (f"Enter a number between {LOW} and {HIGH} ")
     print()  # Spacing between my print statements
     print ("Would you like to place another Order or Exit?")
