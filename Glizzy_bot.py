@@ -27,7 +27,6 @@ def welcome():
     Parameters: none
     Returns: none
     '''
-
 num = randint(0,9)
 
 name = (names[num])
@@ -63,18 +62,18 @@ def val_int(low, high, question):
 
 
 # Menu so that the user can choose either pickup or delivery
-def order_type():
+def order_type(): #Defining the order_type function
     del_pick = ""
     LOW = 1
     HIGH = 2
     question = (f"Enter a number between {LOW} and {HIGH}: ")
-    print()
+    print() #Spacing between my print statements
     print ("Is your order for pickup or delivery?")
-    print()
+    print() #Spacing between my print statements
     print ("For pickup please enter 1")
-    print()
+    print() #Spacing between my print statements
     print ("For delivery please enter 2")
-    print()
+    print() #Spacing between my print statements
     delivery = val_int(LOW, HIGH, question)
     if delivery == 1:
         print ("Pickup")
@@ -82,9 +81,9 @@ def order_type():
         pickup_info()
     else:
         print ("Delivery")
-        print()
+        print() #Spacing between my print statements
         print ("**You must pay an additional $9.00 Delivery Charge if you order 5 or less Sausages**")
-        print()
+        print() #Spacing between my print statements
         delivery_info()
         del_pick = "delivery"
     return del_pick
@@ -100,7 +99,7 @@ def pickup_info():
     print (customer_details['phone'])
 
 #Delivery Information - Name, Phone number, House number, Street name, Suburb
-def delivery_info():
+def delivery_info(): #Defined function 
     question = ("Please enter your name ")
     customer_details['name'] = not_blank(question )
     print (customer_details['name'])
@@ -145,10 +144,10 @@ def order_sausage():
     #Choose sausage from menu
     for item in range(num_sausages):
         while num_sausages > 0:
-            print()
+            print() #Spacing between my print statements
             print("Please choose your sausages by"
             " entering the number from the menu ")
-            print()
+            print() #Spacing between my print statements
             question = (f"Enter a number between {MENU_LOW} and {MENU_HIGH} ")
             sausage_ordered = val_int(MENU_LOW, MENU_HIGH, question)
             sausage_ordered = sausage_ordered -1
@@ -163,24 +162,24 @@ def print_order(del_pick):
     print ("Customer Details")
     if del_pick =="pickup":
         print("Your order is for Pickup")
-        print()
+        print() #Spacing between my print statements
         print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']}")
-        print()
+        print() #Spacing between my print statements
 
     elif del_pick =="delivery":
-        print()
+        print() #Spacing between my print statements
         print("Your order is for Delivery")
         total_cost = total_cost + 9
-        print()
+        print() #Spacing between my print statements
         print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']} \nCustomer Address: {customer_details['house']} {customer_details['street']} {customer_details['suburb']}")
         print("A $9.00 Delivery charge applies")
-    print()
-    print(" Your Order Details")
+    print() #Spacing between my print statements
+    print("Your Order Details")
     count = 0
     for item in order_list:
         print("Ordered: {} Cost ${:.2f}".format(item, order_cost[count]))
         count = count+1
-    print()
+    print() #Spacing between my print statements
     print("Total Order Cost")
     print(f"${total_cost:.2f}")
 
@@ -189,13 +188,13 @@ def cancel_confirm(del_pick):
     LOW = 1
     HIGH = 2
     question = (f"Enter a number between {LOW} and {HIGH} ")
-    print()
+    print() #Spacing between my print statements
     print ("Please Confirm Your Order")
-    print()
+    print() #Spacing between my print statements
     print ("For confirm please enter 1")
-    print()
+    print() #Spacing between my print statements
     print ("For cancel please enter 2")
-    print()
+    print() #Spacing between my print statements
     confirm = val_int(LOW, HIGH, question)
     if confirm == 1:
         print ("**Order Confirmed**")
@@ -214,13 +213,13 @@ def new_exit():
     LOW = 1
     HIGH = 2
     question = (f"Enter a number between {LOW} and {HIGH} ")
-    print()
+    print() #Spacing between my print statements
     print ("Would you like to place another Order or Exit?")
-    print()
+    print() #Spacing between my print statements
     print ("To place another order please enter 1")
-    print()
+    print() #Spacing between my print statements
     print ("To exit the BOT please enter 2")
-    print()
+    print() #Spacing between my print statements
     confirm = val_int(LOW, HIGH, question)
     if confirm == 1:
         print ("New Order")
@@ -237,12 +236,7 @@ def new_exit():
         sys.exit()
 
 #Main Function
-def main():
-    '''
-    Purpose: To generate a random name from the list and print out a welcome message
-    Parameters: none
-    Returns: none
-    '''
+def main(): #Defining my main function that consists of all my other created functions
     welcome()
     del_pick = order_type()
     menu()
