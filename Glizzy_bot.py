@@ -7,7 +7,7 @@
 import random
 from random import randint
 import sys
-# Constants
+# Stored Constants so any function is able to use Low and High parameters
 LOW = 1
 HIGH = 2
 PH_LOW = 7
@@ -30,39 +30,42 @@ order_cost = []
 
 
 # Welcomes the user to the BOT with a randomized name
-def welcome():
+def welcome(): #Defining the welcome function used in main
     '''
     Purpose: To generate a random name from the list and
     print out a welcome message
     Parameters: none
     Returns: none
     '''
-num = randint(0, 9)
-name = (names[num])
-print("*** Welcome to Mickeys Glizzys ***")
-print("*** My name is", name, "***")
-print("I will be here to help you to order your hot and ready Sausages")
+num = randint(0, 9)  # The num variable is what the program chooses as random number from 0 to 9
+name = (names[num])  # The name varible is a random name from the list of random names and the num variable
+print("*** Hi there and Welcome to Mickeys Glizzys! ***")  # Print statement welcome title, welcoming the user to the bot
+print("*** My name is", name, "***")  # Print statement "my name is" and the random name variable 
+print()  # Spacing between my print statements
+print("I will be here to help you to order your hot and ready Sausages :)")  # Print statement of a friendly introduction of what the bot is for 
 # customer details dictonary
 customer_details = {}
 
 
 # Validates inputs to check if they are blank
-def not_blank(question):
-    valid = False
-    while not valid:
+# Parameters: 1
+# Returns: 1
+def not_blank(question):  # Defining not blank function 
+    valid = False  # Valid variable equals false
+    while not valid:  
         response = input(question)
-        if response != "":
-            return response
-        else:
-            print("This cannot be blank")
+        if response != "":  # If the response is blank
+            return response  # Return the response back to the top 
+        else:  
+            print("This cannot be blank")  # Print statement telling the user that their input cannot be blank
 
 
-def check_string(question):
+def check_string(question):  # Defining the check string function to check if the input for name questions only consist of letters
     while True:
         response = input(question)
         x = response.isalpha()
         if x == False:
-            print("Input must only contain letters")
+            print("Input must only contain letters")  #Print statement telling the user that their input cannot be blank
         else:
             return response.title()
 
@@ -75,10 +78,10 @@ def val_int(low, high, question):
             if num >= low and num <= high:
                 return num
             else:
-                print(f"Please enter a number between {low} and {high} ")
+                print(f"Please enter a number between {low} and {high} ")  # Print statement telling the user that the input number must be between two values (1 and 2)
         except ValueError:
-            print("That is not a valid number")
-            print(f"Please enter a number between {low} and {high} ")
+            print("That is not a valid number")  # Print statement telling the user that their input was not a valid number
+            print(f"Please enter a number between {low} and {high} ")  # Print statement telling the user that input number must be between the 2 values (1 and 2)
 
 
 def check_phone(question, PH_LOW, PH_HIGH):
@@ -93,97 +96,96 @@ def check_phone(question, PH_LOW, PH_HIGH):
             if count >= PH_LOW and count <= PH_HIGH:
                 return str(num)
             else:
-                print("NZ phone numbers have between 7 and 10 digits")
+                print("NZ phone numbers have between 7 and 10 digits")  # Print statement telling the user that their input must be between 7 and 10 digits
         except ValueError:
-            print("Please enter a number")
+            print("Please enter a number")  # Print statement asking the user to input a 7-10 digit number
 
 # Menu so that the user can choose either pickup or delivery
 def order_type():  # Defining the order_type function
-    del_pick = ""
-    question = (f"Enter a number between {LOW} and {HIGH}: ")
+    del_pick = ""  # del_pick variable equals nothing
+    question = (f"Enter a number between {LOW} and {HIGH}: ")  # Question variable is a string that is used when the program must ask the user to enter a number between two numbers
     print()  # Spacing between my print statements
-    print ("Is your order for pickup or delivery?")
+    print ("Would you like your order to be picked up or would you like it delivered?")  # Print statement asking the user how they would like their order arranged to be picked up or delivered
     print()  # Spacing between my print statements
-    print ("For pickup please enter 1")
+    print ("For pickup please enter the number 1")  # Print statement telling the user to enter the number one if they would like to pick up their order
     print()  # Spacing between my print statements
-    print ("For delivery please enter 2")
+    print ("For delivery please enter the number 2")  # Print statement telling the user to enter the number two if they would like their order delivered
     print()  # Spacing between my print statements
     delivery = val_int(LOW, HIGH, question)
-    if delivery == 1:
-        print ("Pickup")
+    if delivery == 1:  # If the inputted number is 1
+        print ("**Pickup**")  # Print statement telling the user that they have made an order for pickup
         del_pick = "pickup"
-        pickup_info()
-    else:
-        print ("Delivery")
+        pickup_info()  # Moves from current function to pickup info function
+    else:  # Else/if the inputted number was a 2
+        print ("**Delivery**")  # Print statement telling the user that they have made an order for delivery
         print()  # Spacing between my print statements
-        print ("**You must pay an additional $9.00 Delivery Charge if you order 5 or less Sausages**")
+        print ("**You must pay an additional $9.00 Delivery Charge**")  # Print statement telling the user that they must pay a $9 delivery charge
         print()  # Spacing between my print statements
-        delivery_info()
+        delivery_info()  # Moves from current function to delivery info function
         del_pick = "delivery"
     return del_pick
 
 
 # Pickup Information - Name and Phone number
-def pickup_info():
-    question = ("Please enter your name ")
-    customer_details['name'] = check_string(question )
-    print (customer_details['name'])
+def pickup_info():  # Defined delivery info function used if the user chose their order type as delivery
+    question = ("Please enter in your name ") # Question varible used by the user to input their name
+    customer_details['name'] = check_string(question )  # Name input is checked by the check string function to see if the input only consists of letters
+    print (customer_details['name'])  # Prints the user's inputted name and adds that to the customer details dictionary
 
-    question = ("Please enter your phone number ")
-    customer_details['phone'] = check_phone(question, PH_LOW, PH_HIGH)
-    print (customer_details['phone'])
+    question = ("Please enter in your phone number ")  # Question varible used by the user to input their phone number
+    customer_details['phone'] = check_phone(question, PH_LOW, PH_HIGH)  # Phone number is checked by the check phone function to see if the input only consists of numbers and the input is between 7 and 10 digits
+    print (customer_details['phone'])  # Prints the user's inputted phone number and adds that to the customer details dictionary
 
 
 # Delivery Information - Name, Phone number, House number, Street name, Suburb
-def delivery_info():  # Defined function
-    question = ("Please enter your name ")
-    customer_details['name'] = check_string(question )
-    print (customer_details['name'])
+def delivery_info():  # Defined delivery info function used if the user chose their order type as delivery
+    question = ("Please enter in your name ")  # Question varible used by the user to input their name
+    customer_details['name'] = check_string(question )  # Name input is checked by the check string function to see if the input only consists of letters
+    print (customer_details['name'])  # Prints the user's inputted name and adds that to the customer details dictionary
 
-    question = ("Please enter your phone number ")
-    customer_details['phone'] = check_phone(question, PH_LOW, PH_HIGH)
+    question = ("Please enter in your phone number ")  # Question varible used by the user to input their phone number
+    customer_details['phone'] = check_phone(question, PH_LOW, PH_HIGH)  # Phone number is checked by the check phone function to see if the input only consists of numbers and the input is between 7 and 10 digits
+    print (customer_details['phone'])  # Prints the user's inputted phone number and adds that to the customer details dictionary
 
-    print (customer_details['phone'])
+    question = ("Please enter in your house number ")  # Question varible used by the user to input their house number
+    customer_details['house'] = not_blank(question )  # House number input is checked by the not blank function to see if the input was left not blank
+    print (customer_details['house'])  # Prints the user's inputted house number and adds that to the customer details dictionary
 
-    question = ("Please enter your house number ")
-    customer_details['house'] = not_blank(question )
-    print (customer_details['house'])
+    question = ("Please enter in your street name ")  # Question varible used by the user to input their street name
+    customer_details['street'] = check_string(question )   # Street input is checked by the check string function to see if the input only consists of letters
+    print (customer_details['street'])  # Prints the user's inputted street name and adds that to the customer details dictionary
 
-    question = ("Please enter your street name ")
-    customer_details['street'] = check_string(question )
-    print (customer_details['street'])
-
-    question = ("Please enter your suburb ")
-    customer_details['suburb'] = check_string(question )
-    print (customer_details['suburb'])
+    question = ("Please enter in your suburb ")  # Question varible used by the user to input their suburb
+    customer_details['suburb'] = check_string(question )   # Suburb input is checked by the check string function to see if the input only consists of letters
+    print (customer_details['suburb'])  # Prints the user's inputted suburb and adds that to the customer details dictionary
 
 
 # Sausage Menu
-def menu():
-    number_sausages = 12
+def menu():  # Defining the menu function
+    number_sausages = 12  # Number of sausages variable equals 12
 
     for count in range(number_sausages):
-        print("{} {} ${:.2f}" .format(count+1, sausage_names[count], sausage_prices[count]))
+        print("{} {} ${:.2f}" .format(count+1, sausage_names[count], sausage_prices[count]))  # Print the sausages on the menu in a list from 1 to 12 with the correct prices next to each sausage with a dollar sign and within 2 decimal places
 
 
-def order_sausage():
+def order_sausage():  # Defining the order sausage function
     # ask for total number of sausages for order
     num_sausages = 0
-    LOW = 1
-    HIGH = 8
-    MENU_LOW = 1
-    MENU_HIGH = 12
-    question = (f"Enter a number between {LOW} and {HIGH} ")
-    print()
-    print("How many sausages do you want to order?")
-    print()
-    num_sausages = val_int(LOW, HIGH, question)
+    LOW = 1  # Low constant for this particular function equals 1
+    HIGH = 8  # High constant for this particular function equals 8
+    MENU_LOW = 1  # Menu Low constant equals 1
+    MENU_HIGH = 12  # Menu High constant equals 12
+    question = (f"Enter a number between {LOW} and {HIGH} ")  # Question variable asking the user to enter a number between two values (1 and 8)
+    print()  # Spacing between my print statements
+    print("How many sausages delicious sausages would you like to order?")  # Print statement asking the user how many sausages they want to order
+    print()  # Spacing between my print statements
+    num_sausages = val_int(LOW, HIGH, question)  # Input for the number of sausages is checked using the val int function to check if the input on consisted of numbers 
 
     # Choose sausage from menu
     for item in range(num_sausages):
-        while num_sausages > 0:
+        while num_sausages > 0:  # While the number of sausages wanted is greater than 0
             print()  # Spacing between my print statements
-            print("Please choose your sausages by entering the number from the menu ")
+            print("Please choose your sausages by entering the number from the yummy sausage menu ")  # Print statement telling the user to choose a sausage from the menu by entering a number from 1 to 12
             print()  # Spacing between my print statements
             question = (f"Enter a number between {MENU_LOW} and {MENU_HIGH} ")
             sausage_ordered = val_int(MENU_LOW, MENU_HIGH, question)
@@ -197,92 +199,92 @@ def order_sausage():
 # Print order out - including if order is del or pickup
 # and names of each pizza - total cost including any delivery charge
 def print_order(del_pick):
-    total_cost = sum(order_cost)
-    print ("Customer Details")
+    total_cost = sum(order_cost)  # The total cost of the order is the sum of the order cost 
+    print ("Customer Details")  # Print statement title for the user's customer details
     if del_pick == "pickup":
-        print("Your order is for Pickup")
+        print("Your order is for **Pickup**")  # Print statement telling the user that their order was for pickup
         print()  # Spacing between my print statements
-        print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']}")
+        print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']}")  # Print statement of all the customer's details entered when they chose Pickup
         print()  # Spacing between my print statements
 
     elif del_pick == "delivery":
         print()  # Spacing between my print statements
-        print("Your order is for Delivery")
-        total_cost = total_cost + 9
+        print("Your order is for **Delivery**")  # Print statement telling the user that their order is for delivery
+        total_cost = total_cost + 9  # The total cost of the order is the total cost + $9.00 for the delivery fee
         print()  # Spacing between my print statements
-        print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']} \nCustomer Address: {customer_details['house']} {customer_details['street']} {customer_details['suburb']}")
-        print("A $9.00 Delivery charge applies")
+        print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']} \nCustomer Address: {customer_details['house']} {customer_details['street']} {customer_details['suburb']}")  # Print statement of all the customer's details entered when they chose delivery
+        print("A $9.00 Delivery charge applies")  # Print statement telling the user that there is a $9.00 delivery fee 
     print()  # Spacing between my print statements
-    print("Your Order Details")
+    print("Your Order Details")  # Print statement title for the user's order details
     print()  # Spacing between my print statements
-    print("Delivery Fee $9.00")
+    print("Delivery Fee $9.00")  #  Print statement telling the user that they also must pay an extra $9.00 for the delivery fee
     count = 0
     for item in order_list:
         print()  # Spacing between my print statements
-        print("Ordered: {} Cost ${:.2f}".format(item, order_cost[count]))
+        print("Ordered: {} Cost ${:.2f}".format(item, order_cost[count]))  # Print the order deatils in the order they were ordered and with the correct prices of that sausage with a dollar sign and within 2 decimal places
         count = count+1
     print()  # Spacing between my print statements
-    print("Total Order Cost")
-    print(f"${total_cost:.2f}")
+    print("Total Order Cost")  # Print statement title of the total order cost
+    print(f"${total_cost:.2f}")  # Print statement of the total order cost with a dollar sign and within 2 decimal places
 
 
 # Confirm order or cancel
 def cancel_confirm(del_pick):
-    question = (f"Enter a number between {LOW} and {HIGH} ")
+    question = (f"Enter a number between {LOW} and {HIGH} ")  # Question variable telling the user to enter a number between 2 values (1 and 2)
     print()  # Spacing between my print statements
-    print ("Please Confirm Your Order")
+    print ("Please Confirm Your Order")  # Print statement telling the user to confirm their order
     print()  # Spacing between my print statements
-    print ("For confirm please enter 1")
+    print ("For confirm please enter the number 1")  # Print statement telling the user thet can confirm their order by entering the number 1
     print()  # Spacing between my print statements
-    print ("For cancel please enter 2")
+    print ("For cancel please enter the number 2")  # Print statement telling the user they can cancel their order by entering the number 2
     print()  # Spacing between my print statements
     confirm = val_int(LOW, HIGH, question)
-    if confirm == 1:
-        print ("**Order Confirmed**")
-        new_exit()
+    if confirm == 1:  # If the user inputted 1
+        print ("**Order Confirmed**")  # Print statement telling the user their order has been confirmed
+        new_exit()  # So the program moves on to the new exit function
     if del_pick == "pickup" and confirm == 1:
-        print("You will be sent a text message when your order is ready to be picked up")
-        new_exit()
-    elif confirm == 2:
-        print ("**Order Cancelled**")
-        print ("You may restart your order or exit the BOT")
-        new_exit()
+        print("You will be sent a text message when your order is ready to be picked up")  # Print statement telling the user that they will recieve a message when their order is ready
+        new_exit()  # So the program moves on to the new exit function
+    elif confirm == 2:  # if the user inputted 2
+        print ("**Order Cancelled**")  # Print statement telling the user their order has been cancelled
+        print ("You may restart your order or exit the BOT")  # Print statement telling the user that they may still restart their order or exit the bot
+        new_exit()  # So the program moves on to the new exit function
 
 
 # Option for new order
 def new_exit():
-    question = (f"Enter a number between {LOW} and {HIGH} ")
+    question = (f"Enter a number between {LOW} and {HIGH} ")  # Question variable telling the user to enter a number between 2 values (1 and 2)
     print()  # Spacing between my print statements
-    print ("Would you like to place another Order or Exit?")
+    print ("Would you like to place another Order or Exit?")  # Print statement asking the user if they would like to place another order/restart or exit the bot
     print()  # Spacing between my print statements
-    print ("To place another order please enter 1")
+    print ("To place another order please enter the number 1")  # Print statement telling the user they can place another order/restart order by entering the number 1
     print()  # Spacing between my print statements
-    print ("To exit the BOT please enter 2")
+    print ("To exit the BOT please enter the number 2")  # Print statement telling the user they can exit the bot by entering the number 2
     print()  # Spacing between my print statements
     confirm = val_int(LOW, HIGH, question)
     if confirm == 1:
-        print ("New Order")
-        order_list.clear()
-        order_cost.clear()
-        customer_details.clear()
-        main()
+        print ("New Order")  # Print statement title of new order, telling the user that they have just started a new order
+        order_list.clear()  # Clearing information off all previous lists
+        order_cost.clear()  # Clearing information off all previous lists
+        customer_details.clear()  # Clearing information off all previous lists
+        main()  # Running the main function again after all lists have been cleared (Placing a new order or restarting order from the beginning)
 
     elif confirm == 2:
-        print ("Exit")
-        order_list.clear()
-        order_cost.clear()
-        customer_details.clear()
-        sys.exit()
+        print ("Exit")   # Print statement title of exit, telling the user that they have exited the bot and can no longer add anymore information
+        order_list.clear()  # Clearing information off all previous lists
+        order_cost.clear()  # Clearing information off all previous lists
+        customer_details.clear()  # Clearing information off all previous lists
+        sys.exit()  # System exits (user exits out of the program)
 
 
 # Main Function
 # Defining my main function that
 # consists of all my other created functions
-def main():
-    welcome()
-    del_pick = order_type()
-    menu()
-    order_sausage()
-    print_order(del_pick)
-    cancel_confirm(del_pick)
+def main(): 
+    welcome()  # The welcoming function used in my program
+    del_pick = order_type()  # The order tyoe function used in my program and a part of the del pick variable
+    menu()  # The menu function used in my program
+    order_sausage()  # The ordering of sausages function used in my program
+    print_order(del_pick)  # The order being printed function used in my program in correspondence to the del pick parameter
+    cancel_confirm(del_pick)  # The canceling or confirming function used in my program in correspondence to the del pick parameter
 main()

@@ -81,7 +81,7 @@ def order_type(): # Defining the order_type function
         pickup_info()
     else:
         print ("Delivery")
-        print ("**You must pay an additional $9.00 Delivery Charge if you order 5 or less Sausages**")
+        print ("**You must pay an additional $9.00 Delivery Charge**")
         delivery_info()
         del_pick = "delivery"
     return del_pick
