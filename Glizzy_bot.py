@@ -8,10 +8,10 @@ import random
 from random import randint
 import sys
 # Stored Constants so any function is able to use Low and High parameters
-LOW = 1
-HIGH = 2
-PH_LOW = 7
-PH_HIGH = 10
+LOW = 1  # LOW equals 1
+HIGH = 2  # HIGH equals 2
+PH_LOW = 7  # PH_LOW equals 7
+PH_HIGH = 10  # PH_HIGH equals 10
 # List of random names
 names = ["Mickey", "Nate", "Jay", "Jess", "Sally",
          "Annie", "Christopher", "Jake", "Nasal", "Betty"]
@@ -48,9 +48,9 @@ customer_details = {}
 
 
 # Validates inputs to check if they are blank
-# Parameters: 1
-# Returns: 1
-def not_blank(question):  # Defining not blank function 
+# Takes question as a parameter
+# Returns response in title class if valid
+def not_blank(question):  # Defining not blank function with question as a parameter
     valid = False  # Valid variable equals false
     while not valid:  
         response = input(question)
@@ -61,41 +61,44 @@ def not_blank(question):  # Defining not blank function
 
 
 def check_string(question):  # Defining the check string function to check if the input for name questions only consist of letters
-    while True:
-        response = input(question)
+# Definces code as check_string with question as parameter
+    while True:  # Sets up a loop
+        response = input(question)  # Asks for input (string)
         x = response.isalpha()
-        if x == False:
+        if x == False:  # if x is False prints error message
             print("Input must only contain letters")  #Print statement telling the user that their input cannot be blank
         else:
-            return response.title()
+            return response.title()  # if True returns response in title class
 
 
 # Validates inputs to check if they an integer
-def val_int(low, high, question):
-    while True:
-        try:
-            num = int(input(question))
-            if num >= low and num <= high:
-                return num
-            else:
+# Takes question as parameter
+def val_int(low, high, question):  # Defines code as val_int with low, high and question as parameter
+    while True:  # Sets up loop
+        try:  # While the function is true 
+            num = int(input(question))  # Asks the question
+            if num >= low and num <= high:  # If input is greater or equal to low (1) and less than or equal to high (2)
+                return num  # Returns and accepts the input
+            else:  # If input is not the above
                 print(f"Please enter a number between {low} and {high} ")  # Print statement telling the user that the input number must be between two values (1 and 2)
         except ValueError:
             print("That is not a valid number")  # Print statement telling the user that their input was not a valid number
             print(f"Please enter a number between {low} and {high} ")  # Print statement telling the user that input number must be between the 2 values (1 and 2)
 
-
-def check_phone(question, PH_LOW, PH_HIGH):
-    while True:
-        try:
-            num = int(input(question))
-            test_num = num
-            count = 0
-            while test_num > 0:
-                test_num = test_num//10
-                count = count + 1
-            if count >= PH_LOW and count <= PH_HIGH:
-                return str(num)
-            else:
+# Validates input to check if they are a number
+# Takes question as parameter
+def check_phone(question, PH_LOW, PH_HIGH):  # Defines code as check_phone with question, PH_LOW, PH_HIGH as parameter
+    while True:  # Sets up loop
+        try:  # While the function is true
+            num = int(input(question))  # Asks question as parameter
+            test_num = num  # Input equals variable
+            count = 0  # Count set as 0
+            while test_num > 0:  # While input is greater than 0
+                test_num = test_num//10  # test_num is equal to test_num divided by 10
+                count = count + 1  # Adds 1 to count
+            if count >= PH_LOW and count <= PH_HIGH:  # If count is greater or equal to PH_LOW and less than or equal to PH_HIGH
+                return str(num)  # Returns and accepts input
+            else:  # If input is not the above
                 print("NZ phone numbers have between 7 and 10 digits")  # Print statement telling the user that their input must be between 7 and 10 digits
         except ValueError:
             print("Please enter a number")  # Print statement asking the user to input a 7-10 digit number
