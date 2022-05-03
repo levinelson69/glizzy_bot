@@ -127,7 +127,7 @@ def order_type():  # Defining the order_type function
     else:  # Else/if the inputted number was a 2
         print ("**Delivery**")  # Print statement telling the user that they have made an order for delivery
         print()  # Spacing between my print statements
-        print ("**You must pay an additional $9.00 Delivery Charge**")  # Print statement telling the user that they must pay a $9 delivery charge
+        print ("**You must pay an additional $9.00 Delivery Charge if you order 5 or less sausages")  # Print statement telling the user that they must pay a $9 delivery charge
         print()  # Spacing between my print statements
         delivery_info()  # Moves from current function to delivery info function
         del_pick = "delivery"  # del_pick equals delivery
@@ -243,6 +243,10 @@ def print_order(del_pick):  # Defines function as print_order(del_pick) with par
     elif del_pick == "delivery":  # If order type is for delivery
         print()  # Spacing between my print statements
         print("Your order is for **Delivery**")  # Print statement telling the user that their order is for delivery
+        if len(order_list) >= 5:  # If number of Sausages ordered is more than or equal to 5
+            print ("Your order will be delievered for free")  # Prints message informing the customer their delivery fee is free
+        elif len(order_list) < 5:  # If number of Sausages ordered is less than 5
+            print ("There is an additional $9.00 delivery charge")  # Print statement telling the user that there will be a $9.00 delivery fee
         total_cost = total_cost + 9  # The total cost of the order is the total cost + $9.00 for the delivery fee
         print()  # Spacing between my print statements
         print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']} \nCustomer Address: {customer_details['house']} {customer_details['street']} {customer_details['suburb']}")  # Print statement of all the customer's details entered when they chose delivery
@@ -250,7 +254,6 @@ def print_order(del_pick):  # Defines function as print_order(del_pick) with par
     print()  # Spacing between my print statements
     print("Your Order Details")  # Print statement title for the user's order details
     print()  # Spacing between my print statements
-    print("Delivery Fee $9.00")  #  Print statement telling the user that they also must pay an extra $9.00 for the delivery fee
     count = 0  # Set count to zero
     for item in order_list:  # For items in order list
         print()  # Spacing between my print statements
